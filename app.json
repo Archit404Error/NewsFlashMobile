@@ -2,7 +2,7 @@
   "expo": {
     "name": "NewsFlash",
     "slug": "NewsFlashPhoneClient",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.architmehta.newsflash",
-      "buildNumber": "1.0.4"
+      "buildNumber": "1.0.5"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,6 +31,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "cfacc027-081f-4fb6-891a-58bcf28f0d71"
+      }
     }
   }
 }
