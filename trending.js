@@ -15,10 +15,10 @@ class TrendingTopics extends React.Component {
 
     componentDidMount() {
         const gatherTrending = () => {
-            fetch("http://news-flash-proj.herokuapp.com/trendingApi")
-            .then(res => res.json())
-            .then(resJson => resJson["trending_list"])
-            .then(trending => this.setState({trendingTopics: trending}))
+            fetch("http://newsflash.onrender.com/trendingApi")
+                .then(res => res.json())
+                .then(resJson => resJson["trending_list"])
+                .then(trending => this.setState({ trendingTopics: trending }))
         }
         gatherTrending();
         this.interval = setInterval(gatherTrending, 5000);
@@ -29,35 +29,35 @@ class TrendingTopics extends React.Component {
     }
 
     render() {
-        const {navigation} = this.props;
+        const { navigation } = this.props;
         return (
-            <SafeAreaView style = {{backgroundColor: 'black', flex: 1}}>
-                <ScrollView contentContainerStyle = {{alignItems: 'left', padding: 10}}>
+            <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
+                <ScrollView contentContainerStyle={{ alignItems: 'left', padding: 10 }}>
                     <View>
-                        <Text style = {{ fontSize: 35, fontWeight: 'bold', color: '#2d6ff4', marginTop: 10 }}>Trending Searches</Text>
+                        <Text style={{ fontSize: 35, fontWeight: 'bold', color: '#2d6ff4', marginTop: 10 }}>Trending Searches</Text>
                         {
-                        this.state.trendingTopics.map((topic, index) => {
-                            return (
-                                <View key = {index + " view"} style = {{backgroundColor: '#1e2022', width: 2000, marginLeft: -10, marginTop: 5}}>
-                                    <View key = {index + " row"}>
-                                        <Text key = {index} style = {styles.articleText}>{topic}</Text>
-                                        <Text key = {index + " Search"} style = {styles.subArticleLink}
-                                        onPress = {
-                                            () => {
-                                                navigation.navigate('Query Results', {query: topic});
-                                            }
-                                        }>
-                                            Search this topic
-                                        </Text>
+                            this.state.trendingTopics.map((topic, index) => {
+                                return (
+                                    <View key={index + " view"} style={{ backgroundColor: '#1e2022', width: 2000, marginLeft: -10, marginTop: 5 }}>
+                                        <View key={index + " row"}>
+                                            <Text key={index} style={styles.articleText}>{topic}</Text>
+                                            <Text key={index + " Search"} style={styles.subArticleLink}
+                                                onPress={
+                                                    () => {
+                                                        navigation.navigate('Query Results', { query: topic });
+                                                    }
+                                                }>
+                                                Search this topic
+                                            </Text>
+                                        </View>
                                     </View>
-                                </View>
-                            )
-                        })
+                                )
+                            })
                         }
                         {
                             this.state.trendingTopics.length == 0 &&
-                            <View style = {{backgroundColor: '#1e2022', width: 2000, marginLeft: -10, marginTop: 10}}>
-                                <Text style = {styles.articleText}>No trending articles right now!</Text>
+                            <View style={{ backgroundColor: '#1e2022', width: 2000, marginLeft: -10, marginTop: 10 }}>
+                                <Text style={styles.articleText}>No trending articles right now!</Text>
                             </View>
                         }
                     </View>
@@ -69,5 +69,5 @@ class TrendingTopics extends React.Component {
 
 export default (props) => {
     const navigation = useNavigation();
-    return <TrendingTopics {...props}  navigation = {navigation} />
+    return <TrendingTopics {...props} navigation={navigation} />
 }

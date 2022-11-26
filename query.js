@@ -5,10 +5,10 @@ import { styles } from './styles';
 
 export default class extends React.Component {
     state = {
-        jsonData : {
-            "parsed_articles" : [],
-            "sentiments" : [],
-            "topic" : "",
+        jsonData: {
+            "parsed_articles": [],
+            "sentiments": [],
+            "topic": "",
         }
     }
 
@@ -19,10 +19,10 @@ export default class extends React.Component {
     componentDidMount() {
         var query = this.props.route.params.query;
         query = query.replace(' ', '+');
-        query = 'http://news-flash-proj.herokuapp.com/api?' + query;
+        query = 'http://newsflash.onrender.com/api?' + query;
         fetch(query)
-        .then(response => response.json())
-        .then(resList => this.setState({ jsonData: resList }))
+            .then(response => response.json())
+            .then(resList => this.setState({ jsonData: resList }))
     }
 
     render() {
@@ -35,7 +35,7 @@ export default class extends React.Component {
                 sources.push(source);
             }
             sources.sort((first, second) => {
-                if(sentiments[first][1] > sentiments[second][1]) {
+                if (sentiments[first][1] > sentiments[second][1]) {
                     return 1;
                 } else {
                     return -1;
@@ -46,16 +46,16 @@ export default class extends React.Component {
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView>
-                    { this.state.jsonData["topic"] == "" &&
-                        <ActivityIndicator size = "large" />
+                    {this.state.jsonData["topic"] == "" &&
+                        <ActivityIndicator size="large" />
                     }
-                    <View style = {{alignItems: 'center'}}>
-                        <Text style = {styles.subHeader}>{query}</Text>
-                        <Text style = {{ color: '#9ea6ad', fontSize: 20, marginBottom: 20 }}>
-                            { this.state.jsonData["topic"] != "" &&
-                            <Text style = {{fontWeight: 'bold'}}>
-                                Note: Results are ordered by bias.
-                            </Text> 
+                    <View style={{ alignItems: 'center' }}>
+                        <Text style={styles.subHeader}>{query}</Text>
+                        <Text style={{ color: '#9ea6ad', fontSize: 20, marginBottom: 20 }}>
+                            {this.state.jsonData["topic"] != "" &&
+                                <Text style={{ fontWeight: 'bold' }}>
+                                    Note: Results are ordered by bias.
+                                </Text>
                             }
                         </Text>
                     </View>
@@ -90,14 +90,14 @@ export default class extends React.Component {
                             }
                             var biasStatement = Math.round(sentArr[1] * 100) + "% " + sentArr[0] + " (" + adjective + ")";
                             return (
-                                <View key = {index + " query"} style={styles.queryView}>
-                                    <View key = {index + " imageview"} style = {styles.imageView}>
-                                        <Image key = {index + " image"} style = {styles.image} source = {{uri: parsedArr[4]}}/>
+                                <View key={index + " query"} style={styles.queryView}>
+                                    <View key={index + " imageview"} style={styles.imageView}>
+                                        <Image key={index + " image"} style={styles.image} source={{ uri: parsedArr[4] }} />
                                     </View>
                                     <Text key={index} style={styles.articleText}>
                                         {title}
                                     </Text>
-                                    <View key = {index + " row"} style={{ flexDirection: 'row' }}>
+                                    <View key={index + " row"} style={{ flexDirection: 'row' }}>
                                         <Text key={source} style={styles.subArticleSource}>
                                             {source}
                                         </Text>
@@ -108,7 +108,7 @@ export default class extends React.Component {
                                     <Text key={sentArr[1] + " " + source} style={sentStyle}>
                                         {biasStatement}
                                     </Text>
-                                    <Text key = {index + " AI"} style={styles.AIText}>AI Generated Summary:</Text>
+                                    <Text key={index + " AI"} style={styles.AIText}>AI Generated Summary:</Text>
                                     <Text key={source + " summary"} style={styles.subArticleText}>
                                         {summary}
                                     </Text>

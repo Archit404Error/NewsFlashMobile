@@ -16,18 +16,18 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://news-flash-proj.herokuapp.com/analysisApi?" + this.props.route.params.url;
+        const url = "http://newsflash.onrender.com/analysisApi?" + this.props.route.params.url;
         fetch(url)
-        .then(res => res.json())
-        .then((resJson) => {
-            this.setState({
-                title: resJson["title"],
-                keywords: resJson["keywords"],
-                summary: resJson["summary"],
-                image: resJson["image"],
-                sentiment: resJson["sentiment"],
+            .then(res => res.json())
+            .then((resJson) => {
+                this.setState({
+                    title: resJson["title"],
+                    keywords: resJson["keywords"],
+                    summary: resJson["summary"],
+                    image: resJson["image"],
+                    sentiment: resJson["sentiment"],
+                })
             })
-        })
     }
 
     render() {
@@ -50,32 +50,32 @@ export default class extends React.Component {
         var ruling = Math.round(this.state.sentiment[1] * 100) + "% " + this.state.sentiment[0] + " (" + adjective + ")";
 
         return (
-            <SafeAreaView style = {styles.container}>
+            <SafeAreaView style={styles.container}>
                 <ScrollView>
-                    <View style = {styles.queryView}>
-                        <Text style = {styles.subArticleText}>Showing results for {this.props.route.params.url}</Text>
-                        <View style = {styles.imageView}>
-                            <Image style = {styles.image} source = {{uri : this.state.image}} />
+                    <View style={styles.queryView}>
+                        <Text style={styles.subArticleText}>Showing results for {this.props.route.params.url}</Text>
+                        <View style={styles.imageView}>
+                            <Image style={styles.image} source={{ uri: this.state.image }} />
                         </View>
-                        <Text style = {styles.articleText}>{this.state.title}</Text>
+                        <Text style={styles.articleText}>{this.state.title}</Text>
                         <Text style={senStyle}>
                             {ruling}
                         </Text>
-                        <Text style = {styles.AIText}>Keywords:</Text>
-                        <Text style = {styles.subArticleText}>
-                        {
-                            this.state.keywords.map((word, index) => {
-                                return (
-                                    word + ", "
-                                );
-                            })
-                        }
+                        <Text style={styles.AIText}>Keywords:</Text>
+                        <Text style={styles.subArticleText}>
+                            {
+                                this.state.keywords.map((word, index) => {
+                                    return (
+                                        word + ", "
+                                    );
+                                })
+                            }
                         </Text>
                         <Text style={styles.AIText}>AI Generated Summary:</Text>
-                        <Text style = {styles.subArticleText}>{this.state.summary}</Text>
-                        <Text onPress={() => { this.props.navigation.navigate("Display Article", {url: this.props.route.params.url, artSource: "Inputted URL", bias: ruling}) }} style={styles.subArticleLink}>
-                        Read the full article
-                    </Text>
+                        <Text style={styles.subArticleText}>{this.state.summary}</Text>
+                        <Text onPress={() => { this.props.navigation.navigate("Display Article", { url: this.props.route.params.url, artSource: "Inputted URL", bias: ruling }) }} style={styles.subArticleLink}>
+                            Read the full article
+                        </Text>
                     </View>
                 </ScrollView>
             </SafeAreaView>
