@@ -17,7 +17,7 @@ export default class extends React.Component {
 
     componentDidMount() {
         var articleUrl = this.props.route.params.url;
-        var reqUrl = "http://newsflash.onrender.com/fullArticle?" + articleUrl;
+        var reqUrl = "https://web-production-3b7b.up.railway.app/fullArticle?" + articleUrl;
         fetch(reqUrl)
             .then(response => response.json())
             .then(resList => this.setState({ articleData: resList }));

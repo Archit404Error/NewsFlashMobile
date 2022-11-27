@@ -15,7 +15,7 @@ class TrendingTopics extends React.Component {
 
     componentDidMount() {
         const gatherTrending = () => {
-            fetch("http://newsflash.onrender.com/trendingApi")
+            fetch("https://web-production-3b7b.up.railway.app/trendingApi")
                 .then(res => res.json())
                 .then(resJson => resJson["trending_list"])
                 .then(trending => this.setState({ trendingTopics: trending }))

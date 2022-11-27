@@ -21,7 +21,7 @@ class Headlines extends React.Component {
 
   componentDidMount() {
     const startup = () => {
-      fetch("http://newsflash.onrender.com/topApi")
+      fetch("https://web-production-3b7b.up.railway.app/topApi")
         .then(res => res.json())
         .then(topList => topList["top_articles"][0])
         .then((topArticles) => {

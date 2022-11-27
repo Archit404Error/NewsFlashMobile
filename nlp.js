@@ -16,7 +16,7 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        const url = "http://newsflash.onrender.com/analysisApi?" + this.props.route.params.url;
+        const url = "https://web-production-3b7b.up.railway.app/analysisApi?" + this.props.route.params.url;
         fetch(url)
             .then(res => res.json())
             .then((resJson) => {

@@ -19,7 +19,7 @@ export default class extends React.Component {
     componentDidMount() {
         var query = this.props.route.params.query;
         query = query.replace(' ', '+');
-        query = 'http://newsflash.onrender.com/api?' + query;
+        query = 'https://web-production-3b7b.up.railway.app/api?' + query;
         fetch(query)
             .then(response => response.json())
             .then(resList => this.setState({ jsonData: resList }))
