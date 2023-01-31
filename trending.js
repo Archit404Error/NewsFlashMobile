@@ -3,6 +3,7 @@ import { Text, View, ScrollView, ActivityIndicator, SafeAreaView } from 'react-n
 import { styles } from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { API_URL } from './constants';
 
 class TrendingTopics extends React.Component {
     state = {
@@ -15,7 +16,7 @@ class TrendingTopics extends React.Component {
 
     componentDidMount() {
         const gatherTrending = () => {
-            fetch("https://web-production-3b7b.up.railway.app/trendingApi")
+            fetch(`${API_URL}/trendingApi`)
                 .then(res => res.json())
                 .then(resJson => resJson["trending_list"])
                 .then(trending => this.setState({ trendingTopics: trending }))

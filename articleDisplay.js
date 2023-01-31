@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
 import { styles } from './styles';
+import { API_URL } from './constants';
 
 export default class extends React.Component {
     state = {
@@ -16,9 +17,7 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        var articleUrl = this.props.route.params.url;
-        var reqUrl = "https://web-production-3b7b.up.railway.app/fullArticle?" + articleUrl;
-        fetch(reqUrl)
+        fetch(`${API_URL}/fullArticle?${this.props.route.params.url}`)
             .then(response => response.json())
             .then(resList => this.setState({ articleData: resList }));
     }

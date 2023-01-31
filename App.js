@@ -29,29 +29,29 @@ const NewsFlashTheme = {
 
 function HomeTab() {
   return (
-    <Tab.Navigator 
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-        if (route.name === 'Search') {
-          iconName = focused ? 'ios-globe' : 'ios-globe-outline';
-        } else if (route.name === 'Top Headlines') {
-          iconName = focused ? 'ios-list' : 'ios-list-outline';
-        } else if (route.name === 'Analyze') {
-          iconName = focused ? 'ios-barcode' : 'ios-barcode-outline';
-        }
+          if (route.name === 'Search') {
+            iconName = focused ? 'ios-globe' : 'ios-globe-outline';
+          } else if (route.name === 'Top Headlines') {
+            iconName = focused ? 'ios-list' : 'ios-list-outline';
+          } else if (route.name === 'Analyze') {
+            iconName = focused ? 'ios-barcode' : 'ios-barcode-outline';
+          }
 
-        return <Ionicons name = {iconName} size = {size} color = {color} />;
-      },
-    })}
-  tabBarOptions={{
-      activeTintColor: '#2d6ff4',
-      inactiveTintColor: 'gray',
-    }}>
-      <Tab.Screen name = "Top Headlines" component = {TopStack} />
-      <Tab.Screen name = "Search" component = {HomeStack} />
-      <Tab.Screen name = "Analyze" component = {NlpStack} />
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarOptions={{
+        activeTintColor: '#2d6ff4',
+        inactiveTintColor: 'gray',
+      }}>
+      <Tab.Screen name="Top Headlines" component={TopStack} />
+      <Tab.Screen name="Search" component={HomeStack} />
+      <Tab.Screen name="Analyze" component={NlpStack} />
     </Tab.Navigator>
   );
 }
@@ -59,9 +59,9 @@ function HomeTab() {
 function HomeStack() {
   return (
     <Stack.Navigator initialRouteName="Search">
-      <Stack.Screen name = "Search" component = {HomeScreen} options = {{ headerShown: false }} />
-      <Stack.Screen name = "Query Results" component = {QueryScreen} />
-      <Stack.Screen name = "Display Article" component = {ArticleDisplay} />
+      <Stack.Screen name="Search" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Query Results" component={QueryScreen} />
+      <Stack.Screen name="Display Article" component={ArticleDisplay} />
     </Stack.Navigator>
   );
 }
@@ -69,17 +69,17 @@ function HomeStack() {
 function TopStack() {
   return (
     <Stack.Navigator initialRouteName="TopHeadlines">
-        <Stack.Screen name = "Top Headlines" component = {HeadlineScreen} options = {{ headerShown: false }} />
-        <Stack.Screen name = "Display Article" component = {ArticleDisplay} />
-      </Stack.Navigator>
+      <Stack.Screen name="Top Headlines" component={HeadlineScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="Display Article" component={ArticleDisplay} />
+    </Stack.Navigator>
   );
 }
 
 function NlpStack() {
   return (
-    <Stack.Navigator initialRouteName="Analyze" headerMode = "none">
-      <Stack.Screen name = "Analyze" component={AnalysisScreen} />
-      <Stack.Screen name = "Nlp Results" component={NlpScreen} />
+    <Stack.Navigator initialRouteName="Analyze" headerMode="none">
+      <Stack.Screen name="Analyze" component={AnalysisScreen} />
+      <Stack.Screen name="Nlp Results" component={NlpScreen} />
     </Stack.Navigator>
   );
 }

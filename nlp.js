@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
+import { API_URL } from './constants';
 import { styles } from './styles';
 
 export default class extends React.Component {
@@ -16,8 +17,7 @@ export default class extends React.Component {
     }
 
     componentDidMount() {
-        const url = "https://web-production-3b7b.up.railway.app/analysisApi?" + this.props.route.params.url;
-        fetch(url)
+        fetch(`${API_URL}/analysisApi?${this.props.route.params.url}`)
             .then(res => res.json())
             .then((resJson) => {
                 this.setState({

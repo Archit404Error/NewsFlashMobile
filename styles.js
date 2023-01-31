@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         alignItems: 'center',
         padding: 10,
-        flex: 1,        
+        flex: 1,
     },
     modalButton: {
         backgroundColor: '#1e2022',
@@ -108,17 +108,17 @@ export const styles = StyleSheet.create({
         marginLeft: 10,
         color: '#2d6ff4',
     },
-    subArticlePos: {
+    subArticleDem: {
         fontSize: 20,
         marginBottom: 10,
         marginLeft: 10,
-        color: 'green',
+        color: '#34aeeb',
     },
-    subArticleNeg: {
+    subArticleRep: {
         fontSize: 20,
         marginBottom: 10,
         marginLeft: 10,
-        color: '#cfc325',
+        color: '#750701',
     },
     AIText: {
         fontSize: 20,

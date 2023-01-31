@@ -3,11 +3,11 @@ import { SafeAreaView, ScrollView, View, Text, Image, ActivityIndicator, Modal, 
 import { styles } from './styles';
 import SearchBar from "react-native-dynamic-search-bar";
 import { useScrollToTop } from '@react-navigation/native';
+import { API_URL } from './constants';
 
 class Headlines extends React.Component {
   state = {
-    topHeadlines: {},
-    sources: [],
+    topHeadlines: [],
     keywordPool: [],
     selectedKeywords: [],
     modalVisible: false,
@@ -21,15 +21,11 @@ class Headlines extends React.Component {
 
   componentDidMount() {
     const startup = () => {
-      fetch("https://web-production-3b7b.up.railway.app/topApi")
+      fetch(`${API_URL}/topApi`)
         .then(res => res.json())
         .then(topList => topList["top_articles"][0])
         .then((topArticles) => {
-          let sourceArr = []
-          for (let source in topArticles) {
-            sourceArr.push(source);
-          }
-          this.setState({ topHeadlines: topArticles, sources: sourceArr, date: this.state.months[new Date().getMonth()] + " " + new Date().getDate() })
+          this.setState({ topHeadlines: topArticles, date: this.state.months[new Date().getMonth()] + " " + new Date().getDate() })
         })
     }
     startup();
@@ -73,7 +69,6 @@ class Headlines extends React.Component {
 
                               this.setState({
                                 topHeadlines: this.state.topHeadlines,
-                                sources: this.state.sources,
                                 keywordPool: keywordCopy,
                                 selectedKeywords: selectedCopy,
                               })
@@ -100,7 +95,6 @@ class Headlines extends React.Component {
 
                               this.setState({
                                 topHeadlines: this.state.topHeadlines,
-                                sources: this.state.sources,
                                 keywordPool: keywordCopy,
                                 selectedKeywords: selectedCopy,
                               })
@@ -163,28 +157,29 @@ class Headlines extends React.Component {
               </ScrollView>
             </SafeAreaView>
           </Modal>
-          {this.state.sources.length == 0 &&
+          {this.state.topHeadlines.length == 0 &&
             <Text styles={styles.articleText}>Top headlines loading, check back soon...</Text>
           }
-          {this.state.sources.length == 0 &&
+          {this.state.topHeadlines.length == 0 &&
             <ActivityIndicator size="small" />
           }
 
           {
-            this.state.sources.map((source, index) => {
-              const parsedArr = this.state.topHeadlines[source];
-              const title = parsedArr[0];
-              const summary = parsedArr[1];
-              const link = parsedArr[2];
-              const image = parsedArr[3];
-              const keywords = parsedArr[4];
-              const topic = parsedArr[5];
-              const sentArr = parsedArr[6];
+            this.state.topHeadlines.map((sourceArr, index) => {
+              console.log(sourceArr)
+              const title = sourceArr[0];
+              const source = sourceArr[1];
+              const summary = sourceArr[2];
+              const link = sourceArr[3];
+              const image = sourceArr[4];
+              const keywords = sourceArr[5];
+              const topic = sourceArr[6];
+              const sentArr = sourceArr[7];
               var sentStyle = "";
-              if (sentArr[0] == "positive") {
-                sentStyle = styles.subArticlePos;
+              if (sentArr[0] == "democratic") {
+                sentStyle = styles.subArticleDem;
               } else {
-                sentStyle = styles.subArticleNeg;
+                sentStyle = styles.subArticleRep;
               }
               var adjective;
               if (sentArr[1] <= .6) {
@@ -215,7 +210,6 @@ class Headlines extends React.Component {
                       () => {
                         this.setState({
                           topHeadlines: this.state.topHeadlines,
-                          sources: this.state.sources,
                           keywordPool: keywords,
                           selectedKeywords: [],
                           modalVisible: true,

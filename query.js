@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ActivityIndicator } from 'react-native';
 import { SafeAreaView, ScrollView, View, Text, Image } from 'react-native';
+import { API_URL } from './constants';
 import { styles } from './styles';
 
 export default class extends React.Component {
@@ -19,8 +20,7 @@ export default class extends React.Component {
     componentDidMount() {
         var query = this.props.route.params.query;
         query = query.replace(' ', '+');
-        query = 'https://web-production-3b7b.up.railway.app/api?' + query;
-        fetch(query)
+        fetch(`${API_URL}/api?${query}`)
             .then(response => response.json())
             .then(resList => this.setState({ jsonData: resList }))
     }

@@ -1,2 +1,0 @@
-1. Deal with Washington Post & Bloomberg
-2. Make trending page prettier
