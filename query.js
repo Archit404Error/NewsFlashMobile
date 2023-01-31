@@ -34,13 +34,6 @@ export default class extends React.Component {
             for (var source in parsedObj) {
                 sources.push(source);
             }
-            sources.sort((first, second) => {
-                if (sentiments[first][1] > sentiments[second][1]) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            });
         }
 
         return (
@@ -62,7 +55,7 @@ export default class extends React.Component {
                     {
                         sources.map((source, index) => {
                             var parsedArr = parsedObj[source]
-                            var sentArr = sentiments[source];
+                            var sentArr = sentiments[index];
                             var articleUrl = parsedArr[0];
                             var title = parsedArr[1];
                             var summary = parsedArr[2];
@@ -75,10 +68,10 @@ export default class extends React.Component {
                             } else {
                                 biasStyle = styles.subArticleText;
                             }
-                            if (sentArr[0] == "positive") {
-                                sentStyle = styles.subArticlePos;
+                            if (sentArr[0] == "democratic") {
+                                sentStyle = styles.subArticleLiberal;
                             } else {
-                                sentStyle = styles.subArticleNeg;
+                                sentStyle = styles.subArticleConservative;
                             }
                             var adjective;
                             if (sentArr[1] <= .6) {
