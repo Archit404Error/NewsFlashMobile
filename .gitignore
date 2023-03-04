@@ -4,3 +4,4 @@ package-lock.json
 previews/
 .DS_Store
 constants.js
+yarn-error.log
